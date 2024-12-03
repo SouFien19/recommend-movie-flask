@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <script src="https://cdn.tailwindcss.com"></script>  <!-- Adding Tailwind CSS CDN -->
+</head>
+<body class="bg-gray-100 font-sans p-6">
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-blue-600 text-center mb-6">Recommendations for "{{ movie_title }}"</h1>
+
+        {% if error %}
+            <p class="text-red-500 text-center">{{ error }}</p>
+        {% else %}
+            <h2 class="text-2xl font-semibold text-blue-600 mt-6">KNN Recommendations:</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                {% for movie in knn %}
+                    <li class="text-lg text-gray-800">{{ movie }}</li>
+                {% endfor %}
+            </ul>
+
+            <h2 class="text-2xl font-semibold text-blue-600 mt-6">K-Means Cluster Recommendations:</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                {% for movie in cluster %}
+                    <li class="text-lg text-gray-800">{{ movie }}</li>
+                {% endfor %}
+            </ul>
+
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Metrics Overview</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styling for professional look */
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: white;
+        }
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1F2937; /* Dark gray */
+        }
+        .table th, .table td {
+            text-align: left;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <header class="text-center mb-16">
+            <h1 class="text-4xl font-bold text-indigo-600">Model Metrics Overview</h1>
+            <p class="text-lg text-gray-600 mt-2">Explore the performance of machine learning models and clustering algorithms.</p>
+        </header>
+
+        <!-- Clustering Performance Section -->
+        <section class="mb-16 card p-6">
+            <h2 class="section-title mb-6">Clustering Performance (K-Means)</h2>
+            <p class="text-lg text-gray-700 mb-4">Silhouette Score: <span class="font-semibold text-indigo-600">{{ kmeans_silhouette }}</span></p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Cluster Distribution</h3>
+                    <img src="{{ url_for('static', filename='cluster_distribution.png') }}" alt="Cluster Distribution" class="rounded-lg shadow-lg w-full">
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Genre Distribution</h3>
+                    <img src="{{ url_for('static', filename='genre_distribution.png') }}" alt="Genre Distribution" class="rounded-lg shadow-lg w-full">
+                </div>
+            </div>
+        </section>
+
+        <!-- Model Performance Section -->
+        <section class="mb-16 card p-6">
+            <h2 class="section-title mb-6">Model Performance Metrics</h2>
+
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full text-sm text-gray-700">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="py-3 px-4 text-left">Model</th>
+                            <th class="py-3 px-4 text-left">Accuracy</th>
+                            <th class="py-3 px-4 text-left">Recall</th>
+                            <th class="py-3 px-4 text-left">F1 Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for model_name, values in metrics.items() %}
+                            <tr class="border-b">
+                                <td class="py-2 px-4">{{ model_name }}</td>
+                                <td class="py-2 px-4">{{ values['Accuracy'] }}</td>
+                                <td class="py-2 px-4">{{ values['Recall'] }}</td>
+                                <td class="py-2 px-4">{{ values['F1 Score'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Correlation Heatmap Section -->
+        <section class="mb-16 card p-6">
+            <h2 class="section-title mb-6">Correlation Heatmap</h2>
+            <img src="{{ url_for('static', filename='correlation_heatmap.png') }}" alt="Correlation Heatmap" class="rounded-lg shadow-lg w-full">
+        </section>
+    </div>
+
+</body>
+</html>

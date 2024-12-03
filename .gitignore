@@ -1,0 +1,31 @@
+# Python files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+
+# Flask-specific
+instance/
+.pytest_cache/
+
+# Virtual environment
+venv/
+.env/
+
+# Logs
+*.log
+
+# Static files
+static/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Node.js dependencies (if applicable)
+node_modules/
